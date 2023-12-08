@@ -1,9 +1,10 @@
+import React from 'react';
 import {
   StyledImageGalleryItem,
   ImageGalleryItemPic,
 } from './ImageGalleryItem.styled';
 
-export function ImageGalleryItem({ image, onOpenModal }) {
+const ImageGalleryItem = React.memo(({ image, onOpenModal }) => {
   return (
     <StyledImageGalleryItem as="li">
       <ImageGalleryItemPic
@@ -14,4 +15,6 @@ export function ImageGalleryItem({ image, onOpenModal }) {
       />
     </StyledImageGalleryItem>
   );
-}
+});
+
+export { ImageGalleryItem };
