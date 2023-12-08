@@ -19,7 +19,7 @@ function MyModal({ onCloseModal, children }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleKeyDown]);
+  }, []);
 
   return (
     <BackdropStyled onClick={handleOverlayClick}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import { AiOutlineSearch } from 'react-icons/ai';
 import {
   SearchBarStyled,
