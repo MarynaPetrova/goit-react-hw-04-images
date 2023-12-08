@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { fetchImages } from 'api/fetchImages';
 import { ImageGallery } from './Gallery/ImageGallery/ImageGallery';
 import Searchbar from './SearchBar/SearchBar.js';
@@ -20,8 +20,8 @@ function App() {
   const [tagImageAlt, setTagImageAlt] = useState('');
   const [availablePages, setAvailablePages] = useState(0);
 
-  const updateImages = useMemo(
-    () => async () => {
+  const updateImages = useCallback(
+    async () => {
       try {
         setIsLoading(true);
         setError(false);
