@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { fetchImages } from 'api/fetchImages';
 import { ImageGallery } from './Gallery/ImageGallery/ImageGallery';
-import { Searchbar } from './SearchBar/SearchBar';
-import { LoadMoreBtn } from './LoadMoreBtn/LoadMoreBtn';
-import { Loader } from './Loader/Loader';
-import { MyModal } from './Modal/Modal';
+import { Searchbar } from './SearchBar/SearchBar.js';
+import { LoadMoreBtn } from './LoadMoreBtn/LoadMoreBtn.js';
+import { Loader } from './Loader/Loader.js';
+import { MyModal } from './Modal/Modal.js';
 import toast, { Toaster } from 'react-hot-toast';
-import { GlobalStyle } from './GlobalStyle';
+import { GlobalStyle } from './GlobalStyle.js';
 import { animateScroll as scroll } from 'react-scroll';
 
 function App() {
