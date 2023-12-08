@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { fetchImages } from 'api/fetchImages';
 import { ImageGallery } from './Gallery/ImageGallery/ImageGallery';
-import Searchbar from './SearchBar/SearchBar';
+import { Searchbar } from './SearchBar/SearchBar';
 import { LoadMoreBtn } from './LoadMoreBtn/LoadMoreBtn';
 import { Loader } from './Loader/Loader';
-import MyModal from './Modal/Modal';
+import { MyModal } from './Modal/Modal';
 import toast, { Toaster } from 'react-hot-toast';
 import { GlobalStyle } from './GlobalStyle';
 import { animateScroll as scroll } from 'react-scroll';
-import { generateRandomIndex } from './utils/generateRandomIndex';
 
 function App() {
   const [dataImages, setDataImages] = useState([]);
@@ -20,27 +19,29 @@ function App() {
   const [largeImageURL, setLargeImageURL] = useState('');
   const [tagImageAlt, setTagImageAlt] = useState('');
   const [availablePages, setAvailablePages] = useState(0);
-  const [randomIndex, setRandomIndex] = useState(generateRandomIndex());
 
-  const updateImages = useMemo(() => async () => {
-    try {
-      setIsLoading(true);
-      setError(false);
-      const initialImages = await fetchImages(searchQuery, page);
-      const { hits, totalHits } = initialImages;
-      if (hits.length > 0) {
-        setDataImages(prevImages => [...prevImages, ...hits]);
-        setAvailablePages(Math.ceil(totalHits / 12));
-        toast.success('Successfully found!');
-      } else {
-        toast.error('Nothing found. Check the correctness of the search word.');
+  const updateImages = useMemo(
+    () => async () => {
+      try {
+        setIsLoading(true);
+        setError(false);
+        const initialImages = await fetchImages(searchQuery, page);
+        const { hits, totalHits } = initialImages;
+        if (hits.length > 0) {
+          setDataImages(prevImages => [...prevImages, ...hits]);
+          setAvailablePages(Math.ceil(totalHits / 12));
+          toast.success('Successfully found!');
+        } else {
+          toast.error('Nothing found. Check the correctness of the search word.');
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [searchQuery, page]);
+    },
+    [searchQuery, page]
+  );
 
   useEffect(() => {
     updateImages();
@@ -50,7 +51,6 @@ function App() {
     setSearchQuery(newQuery);
     setPage(1);
     setDataImages([]);
-    setRandomIndex(generateRandomIndex());
   };
 
   const handleLoadMore = () => {
@@ -77,10 +77,7 @@ function App() {
       {isLoading && <Loader />}
       {error && <h1>{error.message}</h1>}
       {dataImages.length > 0 && (
-        <ImageGallery
-          dataImages={dataImages}
-          onOpenModal={handleOpenModal}
-        />
+        <ImageGallery dataImages={dataImages} onOpenModal={handleOpenModal} />
       )}
       {page !== availablePages && dataImages.length >= 11 && !error && (
         <LoadMoreBtn onLoadMore={handleLoadMore} />
