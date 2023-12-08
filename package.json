@@ -5,7 +5,7 @@
   "homepage": "https://MarynaPetrova.github.io/goit-react-hw-04-images/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
-    "@testing-library/react": "^12.1.4",
+    "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.2",
     "modern-normalize": "^2.0.0",
